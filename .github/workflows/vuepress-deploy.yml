@@ -9,7 +9,7 @@ jobs:
         uses: actions/checkout@master
       #打包构建
       - name: vuepress-blog
-        uses: AbsoluteZeroKing/vuepress-blog@master
+        uses: AbsoluteZeroKing/vuepress-blog@main
         env:
           ACCESS_TOKEN: ${{ secrets.TOKEN }}
           TARGET_REPO: AbsoluteZeroKing/vuepress-blog
