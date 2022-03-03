@@ -1,0 +1,7 @@
+---
+layout: Index
+---
+
+<NewFont />
+<Valine/>
+

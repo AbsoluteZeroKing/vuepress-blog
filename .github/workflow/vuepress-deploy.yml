@@ -1,0 +1,17 @@
+name: Build and Deploy
+on: [push]
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+
+      - name: vuepress-blog
+        uses: AbsoluteZeroKing/vuepress-blog@master
+        env:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          TARGET_REPO: AbsoluteZeroKing/vuepress-blog
+          TARGET_BRANCH: master
+          BUILD_SCRIPT: npm && npm example:build
+          BUILD_DIR: example/.vuepress/dist/
