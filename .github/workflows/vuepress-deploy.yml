@@ -4,10 +4,9 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      #下载源码
       - name: Checkout
         uses: actions/checkout@main
-      #打包构建
+
       - name: vuepress-blog
         uses: AbsoluteZeroKing/vuepress-blog@main
         env:
