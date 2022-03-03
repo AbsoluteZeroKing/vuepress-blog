@@ -4,14 +4,15 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
+      #下载源码
       - name: Checkout
         uses: actions/checkout@master
-
+      #打包构建
       - name: vuepress-blog
         uses: AbsoluteZeroKing/vuepress-blog@master
         env:
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          ACCESS_TOKEN: ${{ secrets.TOKEN }}
           TARGET_REPO: AbsoluteZeroKing/vuepress-blog
-          TARGET_BRANCH: master
+          TARGET_BRANCH: main
           BUILD_SCRIPT: npm && npm example:build
           BUILD_DIR: example/.vuepress/dist/
