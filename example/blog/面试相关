@@ -1,0 +1,240 @@
+---
+title: 面试相关
+date: 2022/3/17
+updated: 2022/3/17 13:34
+categories:
+tags:
+- 前端
+  summary:
+  面试前的准备工作
+---
+
+## 需要学习的内容
+
+webpack配置相关 1h
+后盾人CSS 2h
+后盾人JS 6h
+
+
+## 面试前的准备工作
+
+### HTTP请求相关
+- 从网址到本地全过程描述
+  - URL组成
+  - 缓存策略
+    - 强缓存
+    - 协商缓存
+    - local storage、session storage、cookies、trust token（内存 cache storage）
+  - DNS
+  - TCP连接
+  - HTTP请求
+  - 接受响应渲染Render
+- 从请求到本地全过程
+  - 请求类型 GET POST PUT DELETE
+  - 常用请求头
+  - 请求是否跨域
+    - 同域的判断
+    - 跨域的解决方式(CORS)
+  - 常见响应
+
+### JS相关
+
+#### 数组相关
+- 数组方法
+  - 可以改变数组本身（Vue所监视的方法）
+    - push
+    - pop
+    - shift
+    - unshift
+    - splice
+    - sort
+    - reverse
+  - 数组一些常用的方法
+    - slice
+    - join
+    - split
+    - filter
+    - find
+  - 遍历数组所用的方法
+    - map/flatMap（对数组每个元素做修饰）
+    - forEach(val,index,arr)
+    - for of 遍历value
+    - for in 遍历index
+  - 查找数组所用的方法
+    - find/findIndex
+    - some/every
+    - includes
+
+### 面试问题相关
+
+#### webpack
+1. webpack怎么打包，从配置、输入、输出，整个流程全部说一下
+   webpack webpack-cli => npx webpack =>
+   {
+      mode
+      entry
+      output
+      modules: {
+        rules:{[]}
+      }
+      plugins:
+   }
+   开发环境: scopeHoisting减少函数声明内存开销  treeShaking剔除代码 splitChunks分包
+   生产环境:热部署webpack-dev-server HotModuleReplacementPlugin
+
+2. vue-loader怎么解析vue文件
+3. vue 虚拟dom 和 diff算法
+   虚拟dom是状态映射成视图的一种解决方式，做的事情是比对新旧虚拟节点，并根据结果进行dom操作更新视图
+   vue通过模板来描述状态和映射之间的关系，将模板编译成渲染函数，再执行渲染函数生成虚拟节点，最后用虚拟节点更新视图
+
+   vnode类型:注释节点,文本节点,元素节点
+
+   patching算法
+   新增 删除 更新
+   新增:oldVnode不存在，vnode存在;或者vnode,oldvnode完全不是一个节点;
+       CreateElement appendChild
+       创建节点只针对于元素节点:tag，注释节点:isComment  文本节点:text
+   删除:节点只在oldVnode存在
+   更新:if(静态节点)=>跳过
+       else if(有不同的属性)=>if(text)=>直接更新text;else {元素节点=>对孩子做比较 先序深度优先遍历}
+
+4. 场景题：假如一个组件需要使用到很多次，数据量很多，怎么进行优化
+   懒加载+分页
+   虚拟滚动技术:每次只渲染可视区域的列表数,当滚动后动态的追加元素并通过顶部padding来撑起整个滚动内容
+
+5.清除浮动的方式
+   1.clear
+   2.在最后追加一个元素 clear
+   3.使用::after clear block
+   4.父元素触发BFC
+
+7. 跨域解决方案
+   jsonp(只能get，异步)
+   CORS:
+   简单请求:GET POST HEAD && ContentType: text form-data x-www-form-urlencoded
+   预检请求:首先需使用options方法发起一个预检请求到服务器
+8. 浏览器渲染过程和node事件循环
+   DOM Tree  -
+              |->Render Tree->Layout(回流，根据viewport决定元素在视口内位置大小)->Paint(重绘，得到节点的绝对像素)
+   CSSOM Tree-
+10. css实现hover打勾
+11. 自我介绍
+12. 样式选择器权重
+    !important最高
+    行内1000
+    id选择器0100
+    类选择器，伪类选择器0010
+    标签选择器，伪元素选择器0001
+    通配符0000
+    继承权重NULL
+
+13. 垂直水平居中方法
+    flex
+    left，top 50 transform translate(-50，-50)
+    left，top，bottom，right 0 margin auto需要设置宽高
+
+
+
+14. 数组遍历方法
+    map
+    flatMap
+    forEach
+    for of
+    for in
+
+15. 防抖节流 口述具体实现
+
+
+16. 改变this指向的方法，bind,call,apply，口述它们的实现（这也太难说了(￣▽￣)"）
+
+17. js事件循环机制
+
+18. 浏览器缓存机制，强缓存，协商缓存，http头字段
+
+19. es6 口述promise模拟实现promise.all（不看着代码根本捋不清啊(＠_＠;)）
+
+20. vue组件间传值
+
+21. get post区别
+
+22. 微信小程序获得用户唯一id的过程（不懂）
+
+23. 项目的一些问题 git常用命令 怎么用git协作开发的
+
+24. 数组合并去重扁平化
+
+25. 判断回文字符串
+
+26. 快排，插入
+
+27. 同源策略
+
+28. box-sizing属性
+    border-box 将元素宽高固定
+    content-box 标准盒模型
+29.如何判断IP是内网还是外网
+30.axios基于事件的封装，解释一下
+31.axios请求的取消，如何实现的。XML和Fetch原生可以取消请求吗
+32.$set底层是如何做响应式的，为什么可以解决vue2响应式监听的问题
+33.vue是如何做响应式的
+34.开发中遇到过页面渲染时的卡顿吧，如何做优化
+35.讲一下css中flex布局的相关属性
+36.flex实现：两个div，左边定宽，右边自适应
+37.js数组有哪些是会改变原数组的 splice? slice? reduce...?
+38.介绍一下es6的语法
+39.箭头函数和普通函数区别，如果用call之类的来改变，this指向会变吗
+40.数组扁平化：如[[4, 5, [5, 6]], 1]
+41.ES6相关
+42.let,const,var区别
+43.等一下你刚刚说var变量声明提升，说说看变量声明提升？讲了v8的解析和执行过程等。
+44.箭头函数介绍一下，回答一波后，为什么不能做构造函数，new操作符过程呢？
+45.说说数组有什么api(好怕被挑一个让我手写api)
+46.看题目说输出(事件循环)
+47.v-if,v-show区别
+48.(跨域的解决方案)为什么需要跨域,几种方案，(jsonp,服务器代理)还有呢？"cors"。"cosr具体处理跨域的？"。 如果没有跨域会怎么样？安全相关。跨域的时候http怎么设置的？
+49.浏览器缓存 cookie,sessionSotrage,localStorage，区别，用途
+50.this 我说了四种this的情况.
+51.vue响应式原理(数据劫持+消息订阅)
+52.vue2和3响应式有什么区别？
+53.vue中直接修改数组的长度或者索引可以变成响应式数据吗？不能.Vue.set可以，Vue.set为什么可以知道吗？
+54.proxy和object.defineProperty 有什么区别优势呢？
+55.路由懒加载怎么实现的，原理知道吗？ es,module动态加载，不太对。原理不是这个
+56.闭包介绍一下，具体应用场景呢？
+57.深浅克隆了解吗。手写深克隆
+58.根据场景题写代码
+59.快排
+60.算法题 一题dp..(凉)  讲了一下思路
+61.图片预加载怎么实现的？
+62.防抖节流的区别，手写了一下防抖
+63.Vue生命周期
+64.vue常用指令
+65.v-if v-show区别
+66.父子组件通信
+67.es6新特性
+68.export 和 export default区别
+69.数据结构了解的咋样
+70.排序算法哪些稳定，哪些不稳（没答上
+71.有哪些排序算法
+72.get post请求的区别
+73.角色权限控制怎么实现的
+74.权限验证和cookie有什么区别
+75.大文件上传与下载怎么实现的
+76.怎么优化下载时间长的问题
+77.怎么解决跨域（CORS、jsonp、nginx
+78.git merge 和git rebase区别
+79.回流重绘
+    回流一定会触发重绘
+    减少回流重绘的方式：
+    集中改变样式
+    集中操作DOM
+    复杂动画效果用absolute或fixed使其脱离文档流
+    CSS3 transform
+80.对 BFC 的理解
+81.两栏布局
+    1.左float右margin-left
+    2.左float右overflow:auto(hidden)触发BFC
+    3.子绝父相,左absolute，left,右margin-left
+    4.子绝父相,左定宽，右absolute,left定宽，其他0
+    5.flex
+82.圣杯双飞翼
+83.水平垂直居中
